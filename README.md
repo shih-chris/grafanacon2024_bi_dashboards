@@ -11,6 +11,15 @@ At Grafana Labs we leverage a central data warehouse to combine and store much o
 
 However, for this demo, in order to appease the demo gods, we will build everything locally, store our data in a PostgresDB, and leverage our Grafana Postgres data source.
 
+## How to Run
+To run the demo setup:
+`docker-compose up -d`
+
+Connect to postgres:
+`psql -h localhost -p 5432 postgres postgres`
+
+View the grafana dashboard at [http://localhost:3000/](http://localhost:3000/)
+
 ## Relevant Links
 - [GrafanaCON agenda link](https://grafana.com/about/events/grafanacon/2024/agenda/)
 - [Building interactive Grafana dashboards for business intelligence](https://grafana.com/about/events/grafanacon/2024/building-interactive-bi-dashboards-tips-and-tricks/) event details
