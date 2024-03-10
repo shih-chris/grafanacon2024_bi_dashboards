@@ -1,5 +1,8 @@
 # GrafanaCON 2024 - Building interactive Grafana dashboards for business intelligence
 ## Overview
+This is a demo dashboard for use in the [Building interactive Grafana dashboards for business intelligence](https://grafana.com/about/events/grafanacon/2024/building-interactive-bi-dashboards-tips-and-tricks/) presentation!
+
+
 In this repo, we will build a Grafana dashboard that digs into our Grafana Community data to share and example of how we have used Grafana's native interactivity to create business intelligence dashboards that encourage users to explore.
 
 
@@ -13,10 +16,12 @@ However, for this demo, in order to appease the demo gods, we will build everyth
 
 ## How to Run
 To run the demo setup:
-`docker-compose up -d`
+
+```docker-compose up -d```
 
 Connect to postgres:
-`psql -h localhost -p 5432 postgres postgres`
+
+```psql -h localhost -p 5432 postgres postgres```
 
 View the grafana dashboard at [http://localhost:3000/](http://localhost:3000/)
 
