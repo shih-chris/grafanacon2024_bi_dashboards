@@ -17,11 +17,15 @@ However, for this demo, in order to appease the demo gods, we will build everyth
 ## How to Run
 To run the demo setup:
 
-```docker-compose up -d```
+```bash
+docker-compose up -d
+```
 
 Connect to postgres:
 
-```psql -h localhost -p 5432 postgres postgres```
+```sql
+psql -h localhost -p 5432 postgres postgres
+```
 
 View the grafana dashboard at [http://localhost:3000/](http://localhost:3000/)
 
