@@ -1,0 +1,23 @@
+version: '3.0'
+
+services:
+  postgres_db:
+    image: postgres:15
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres/postgres-data/:/var/lib/postgresql/data
+      - ./postgres/sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    environment:
+      POSTGRES_DB: community_db
+      POSTGRES_USER: community_user
+      POSTGRES_PASSWORD: community_pwd
+  grafana:
+    container_name: 'grafanacon2024_bi_dashboards'
+    build:
+      context: ./grafana/.config
+    ports:
+      - 3000:3000/tcp
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning

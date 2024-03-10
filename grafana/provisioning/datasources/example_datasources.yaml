@@ -1,0 +1,13 @@
+# apiVersion: 1
+#
+# datasources:
+#   - name: Postgres
+#     type: postgres
+#     url: postgres_db:5432
+#     database: community_db
+#     user: community_user
+#     secureJsonData:
+#       password: community_pwd
+#     jsonData:
+#       sslmode: 'disable' # disable/require/verify-ca/verify-full
+#     isDefault: true
