@@ -22,3 +22,4 @@ services:
       - 3000:3000/tcp
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/config/grafana.ini:/etc/grafana/grafana.ini
