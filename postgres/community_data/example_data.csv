@@ -1,0 +1,5 @@
+id,date_day,url,page_views
+1,"2024-01-01","grafana.com/test_url",10
+2,"2024-01-02","grafana.com/test_url",15
+3,"2024-01-03","grafana.com/test_url",20
+4,"2024-01-04","grafana.com/test_url",25
