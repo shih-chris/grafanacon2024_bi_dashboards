@@ -1,0 +1,2 @@
+postgres/community_data/*
+!postgres/community_data/example_data.csv
