@@ -21,12 +21,6 @@ To run the demo setup:
 docker-compose up -d
 ```
 
-Connect to postgres:
-
-```sql
-psql -h localhost -p 5432 postgres postgres
-```
-
 View the grafana dashboard at [http://localhost:3000/](http://localhost:3000/)
 
 ## Relevant Links
