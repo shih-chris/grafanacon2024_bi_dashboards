@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 2,
   "links": [],
   "panels": [
     {
@@ -103,6 +103,149 @@
         },
         "content": "<div style=\"vertical-align: top; border: 0px;\"\">\n    <p style=\"text-align: center; font-size: 150%; padding: 0px; margin: 0px;\">\n        <b>Overview</b>\n    </p>\n    <p style=\"text-align: center; font-size: 80%; padding: 0px; margin: 0px\">\n        <em>(does NOT update based on top time selection)</em>\n    </p> \n</div>",
         "mode": "html"
+      },
+      "pluginVersion": "10.4.0",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "page_views"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#797979",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "moving_average"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 11,
+          "refId": "A"
+        }
+      ],
+      "title": "Latest Daily Data",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "distinct_pages": true,
+              "unique_visitors": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "distinct_pages": "",
+              "moving_average": "Moving Average (7 days)",
+              "page_views": "Community Page Views",
+              "t7d_moving_average": "7-day Moving Average",
+              "unique_visitors": "Unique Visitors"
+            }
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "P44368ADAD746BC27"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 12,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "",
+        "mode": "markdown"
       },
       "pluginVersion": "10.4.0",
       "transparent": true,
@@ -212,9 +355,9 @@
         "h": 13,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 12
       },
-      "id": 3,
+      "id": 11,
       "options": {
         "legend": {
           "calcs": [],
@@ -298,6 +441,7 @@
             "cellOptions": {
               "type": "auto"
             },
+            "filterable": false,
             "inspect": true
           },
           "mappings": [],
@@ -325,7 +469,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 300
+                "value": 360
               },
               {
                 "id": "custom.cellOptions",
@@ -350,6 +494,18 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Page Title"
+            },
+            "properties": [
+              {
+                "id": "custom.filterable",
+                "value": true
+              }
+            ]
           }
         ]
       },
@@ -357,7 +513,7 @@
         "h": 13,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 25
       },
       "id": 10,
       "options": {
@@ -383,7 +539,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "with\n\npage_views as (\n\n    select\n        p.page_title\n        ,p.page_path\n        ,sum(page_views) as page_views\n        ,sum(unique_visitors) as unique_visitors\n    from\n        rpt_community_stats_daily p\n    where\n        p.received_date <= '2024-03-21'\n    group by 1,2\n\n),\n\nfinal as (\n\n    select\n        p.page_title\n        ,p.page_path\n        ,p.page_views\n        ,p.unique_visitors\n    from\n        page_views p\n\n)\n\nselect *\nfrom final\norder by 3 desc\nlimit 10\n",
+          "rawSql": "with\n\npage_views as (\n\n    select\n        p.page_title\n        ,p.page_path\n        ,sum(page_views) as page_views\n        ,sum(unique_visitors) as unique_visitors\n    from\n        rpt_community_stats_daily p\n    where\n        p.received_date <= '2024-03-21'\n    group by 1,2\n\n),\n\nfinal as (\n\n    select\n        p.page_title\n        ,p.page_path\n        ,p.page_views\n        ,p.unique_visitors\n    from\n        page_views p\n\n)\n\nselect *\nfrom final\norder by 3 desc\nlimit 100\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -439,7 +595,7 @@
         "h": 2,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 38
       },
       "id": 7,
       "options": {
@@ -461,7 +617,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 40
       },
       "id": 6,
       "panels": [],
@@ -477,7 +633,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 41
       },
       "id": 8,
       "options": {
@@ -497,19 +653,20 @@
       "type": "dashlist"
     }
   ],
+  "refresh": "",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-8M",
+    "from": "now-6M",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "utc",
-  "title": "01_initial_static_dashboard",
-  "uid": "fdgrff5tcybr4e",
-  "version": 18,
+  "title": "01_initial_static_dashboard WIP COPY",
+  "uid": "cdgsa5e5zi1ogd",
+  "version": 5,
   "weekStart": ""
 }
