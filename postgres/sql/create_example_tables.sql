@@ -11,11 +11,12 @@ copy rpt_test_data from '/usr/share/community_data/example_data.csv' delimiter '
 
 -- Create table for overall community stats
 create table if not exists rpt_community_stats_daily (
-    id int not null,
-    date_day date not null,
-    url varchar(250) not null,
+    received_date date not null,
+    page_path varchar(1000) not null,
+    page_title varchar(1000),
+    is_page_first_day boolean,
     page_views int not null,
-    primary key (id)
+    unique_visitors int not null
 );
 
 copy rpt_community_stats_daily from '/usr/share/community_data/community_stats_daily.csv' delimiter ',' csv header;
