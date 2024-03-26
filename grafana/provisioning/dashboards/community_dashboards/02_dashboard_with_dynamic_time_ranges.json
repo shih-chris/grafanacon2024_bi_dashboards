@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 3,
   "links": [],
   "panels": [
     {
@@ -64,7 +64,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "# Step 1: Initial High-level Dashboard\n\nCommunity data overview (without dynamic elements) - design elements borrowed **heavily** from a similar [post](https://grafana.com/blog/2022/05/31/grafana-for-business-intelligence-how-grafana-labs-uses-dashboards-for-more-than-observability-data/) I wrote on using Grafana for BI",
+        "content": "# Step 2: Dynamic Time Ranges\n\nDesign elements borrowed **heavily** from a similar [post](https://grafana.com/blog/2022/05/31/grafana-for-business-intelligence-how-grafana-labs-uses-dashboards-for-more-than-observability-data/) I wrote on using Grafana for BI",
         "mode": "markdown"
       },
       "pluginVersion": "10.4.0",
@@ -434,7 +434,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "with\n\npage_views as (\n\n    select\n        date_trunc('day', p.received_date) as time_period\n        ,sum(page_views) as page_views\n        ,sum(new_page_views) as new_page_views\n        ,sum(unique_visitors) as unique_visitors\n        ,sum(unique_pages) as unique_pages\n    from\n        rpt_community_stats_daily p\n    where\n        p.received_date <= '2024-03-25'\n    group by 1\n\n),\n\nfinal as (\n\n    select\n        p.time_period\n        ,p.page_views\n        ,p.new_page_views\n        ,p.unique_visitors\n        ,p.unique_pages\n        ,avg(p.page_views) over (order by p.time_period rows between 6 preceding and current row) as moving_average\n    from\n        page_views p\n\n)\n\nselect *\nfrom final\norder by 1\n",
+          "rawSql": "with\n\npage_views as (\n\n    select\n        date_trunc('day', p.received_date) as time_period\n        ,sum(page_views) as page_views\n        ,sum(new_page_views) as new_page_views\n        ,sum(unique_visitors) as unique_visitors\n        ,sum(unique_pages) as unique_pages\n    from\n        rpt_community_stats_daily p\n    where\n        $__timeFilter(p.received_date)\n    group by 1\n\n),\n\nfinal as (\n\n    select\n        p.time_period\n        ,p.page_views\n        ,p.new_page_views\n        ,p.unique_visitors\n        ,p.unique_pages\n        ,avg(p.page_views) over (order by p.time_period rows between 6 preceding and current row) as moving_average\n    from\n        page_views p\n\n)\n\nselect *\nfrom final\norder by 1\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -569,7 +569,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -684,7 +685,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "with\n\npage_views as (\n\n    select\n        p.page_title\n        ,p.page_path\n        ,sum(page_views) as page_views\n        ,sum(unique_visitors) as unique_visitors\n    from\n        rpt_community_page_stats_daily p\n    where\n        p.received_date <= '2024-03-21'\n    group by 1,2\n\n),\n\nfinal as (\n\n    select\n        p.page_title\n        ,p.page_path\n        ,p.page_views\n        ,p.unique_visitors\n    from\n        page_views p\n\n)\n\nselect *\nfrom final\norder by 3 desc\nlimit 20",
+          "rawSql": "with\n\npage_views as (\n\n    select\n        p.page_title\n        ,p.page_path\n        ,sum(page_views) as page_views\n        ,sum(unique_visitors) as unique_visitors\n    from\n        rpt_community_page_stats_daily p\n    where\n        $__timeFilter(received_date)\n    group by 1,2\n\n),\n\nfinal as (\n\n    select\n        p.page_title\n        ,p.page_path\n        ,p.page_views\n        ,p.unique_visitors\n    from\n        page_views p\n\n)\n\nselect *\nfrom final\norder by 3 desc\nlimit 20",
           "refId": "A",
           "sql": {
             "columns": [
@@ -825,8 +826,8 @@
   },
   "timepicker": {},
   "timezone": "utc",
-  "title": "01_initial_static_dashboard",
-  "uid": "adguxeu8k2m0wb",
-  "version": 8,
+  "title": "02_dashboard_with_dynamic_time_ranges",
+  "uid": "ddguzldskac5ca",
+  "version": 3,
   "weekStart": ""
 }

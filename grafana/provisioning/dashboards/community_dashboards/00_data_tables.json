@@ -167,7 +167,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "select *\nfrom rpt_community_stats_daily\nlimit 10",
+          "rawSql": "select *\nfrom rpt_community_page_stats_daily\nlimit 10",
           "refId": "A",
           "sql": {
             "columns": [
@@ -188,7 +188,7 @@
           }
         }
       ],
-      "title": "rpt_community_stats_daily",
+      "title": "rpt_community_page_stats_daily",
       "transparent": true,
       "type": "table"
     }
