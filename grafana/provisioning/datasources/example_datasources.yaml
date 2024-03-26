@@ -11,3 +11,13 @@
 #     jsonData:
 #       sslmode: 'disable' # disable/require/verify-ca/verify-full
 #     isDefault: true
+#
+#   - name: Clickhouse
+#     type: grafana-clickhouse-datasource
+#     access: proxy
+#     jsonData:
+#       username: default
+#       server: clickhouse
+#       port: 9000
+#       tlsSkipVerify: false
+#     editable: true

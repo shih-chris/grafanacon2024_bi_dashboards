@@ -1,19 +1,20 @@
 version: '3.0'
 
 services:
-  postgres_db:
-    image: postgres:15
-    restart: always
-    ports:
-      - 5432:5432
-    volumes:
-      - ./postgres/community_data/:/usr/share/community_data/
-      - ./postgres/sql/create_example_tables.sql:/docker-entrypoint-initdb.d/create_example_tables.sql
-      # - ./postgres/sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-    environment:
-      POSTGRES_DB: community_db
-      POSTGRES_USER: community_user
-      POSTGRES_PASSWORD: community_pwd
+#  postgres_db:
+#    image: postgres:15
+#    restart: always
+#    ports:
+#      - 5432:5432
+#    volumes:
+#      - ./postgres/community_data/:/usr/share/community_data/
+#      - ./postgres/sql/create_example_tables.sql:/docker-entrypoint-initdb.d/create_example_tables.sql
+#      # - ./postgres/sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+#    environment:
+#      POSTGRES_DB: community_db
+#      POSTGRES_USER: community_user
+#      POSTGRES_PASSWORD: community_pwd
+
   grafana:
     container_name: 'grafanacon2024_bi_dashboards'
     build:
@@ -23,3 +24,25 @@ services:
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/config/grafana.ini:/etc/grafana/grafana.ini
+    environment:
+      GF_INSTALL_PLUGINS: grafana-clickhouse-datasource
+    networks:
+      - grafana
+
+  clickhouse:
+    image: 'clickhouse/clickhouse-server:24.1'
+    container_name: 'grafana-clickhouse-server'
+    ports:
+      - '8123:8123'
+      - '9000:9000'
+      - '5432:5432'
+      - '3306:3306'
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    networks:
+      - grafana
+
+networks:
+  grafana:
