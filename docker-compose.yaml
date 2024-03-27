@@ -37,6 +37,12 @@ services:
       - '9000:9000'
       - '5432:5432'
       - '3306:3306'
+    volumes:
+      - ./clickhouse/data:/var/lib/clickhouse
+      - ./clickhouse/community_data:/home/community_data
+      - ./clickhouse/config.d/config.xml:/etc/clickhouse-server/config.d/config.xml
+      - ./clickhouse/users.d/users.xml:/etc/clickhouse-server/users.d/users.xml
+      - ./clickhouse/init_scripts:/docker-entrypoint-initdb.d
     ulimits:
       nofile:
         soft: 262144
