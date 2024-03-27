@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "panels": [
     {
@@ -307,7 +306,10 @@
       "type": "text"
     },
     {
-      "datasource": {},
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "PDF61E9E97939C7ED"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -823,6 +825,6 @@
   "timezone": "utc",
   "title": "01_initial_static_dashboard_clickhouse",
   "uid": "fdgvrw1oy7z7kd",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }
