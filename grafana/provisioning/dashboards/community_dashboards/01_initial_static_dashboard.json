@@ -375,7 +375,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#797979",
+                  "fixedColor": "#787878cc",
                   "mode": "fixed"
                 }
               }
@@ -826,6 +826,6 @@
   "timezone": "utc",
   "title": "01_initial_static_dashboard_clickhouse",
   "uid": "fdgvrw1oy7z7kd",
-  "version": 1,
+  "version": 3,
   "weekStart": ""
 }

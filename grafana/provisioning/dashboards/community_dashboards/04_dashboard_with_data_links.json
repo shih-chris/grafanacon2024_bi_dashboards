@@ -687,7 +687,7 @@
           "pluginVersion": "4.0.3",
           "queryType": "table",
           "rawQuery": true,
-          "rawSql": "with\n\npage_views as (\n\n    select\n        date_trunc('${time_period}', p.received_date) as time_period\n        ,sum(page_views) as page_views\n    from\n        rpt_community_page_stats_daily p\n    where\n        p.page_title = cast('${community_page_title}' as String)\n    group by 1\n\n),\n\nfinal as (\n\n    select\n        p.time_period\n        ,p.page_views\n        ,avg(p.page_views) over (order by p.time_period rows between (${moving_average_periods}-1) preceding and current row) as moving_average\n    from\n        page_views p\n\n)\n\nselect *\nfrom final\nwhere $__timeFilter(time_period)\norder by 1\n",
+          "rawSql": "with\n\npage_views as (\n\n    select\n        date_trunc('${time_period}', p.received_date) as time_period\n        ,sum(page_views) as page_views\n    from\n        rpt_community_page_stats_daily p\n    where\n        p.page_title = cast(${community_page_title:sqlstring} as String)\n    group by 1\n\n),\n\nfinal as (\n\n    select\n        p.time_period\n        ,p.page_views\n        ,avg(p.page_views) over (order by p.time_period rows between (${moving_average_periods}-1) preceding and current row) as moving_average\n    from\n        page_views p\n\n)\n\nselect *\nfrom final\nwhere $__timeFilter(time_period)\norder by 1\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -916,7 +916,12 @@
           "show": true
         },
         "showHeader": true,
-        "sortBy": []
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Community Page Views"
+          }
+        ]
       },
       "pluginVersion": "10.4.0",
       "targets": [
@@ -1058,7 +1063,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "day",
           "value": "day"
         },
@@ -1112,8 +1117,8 @@
       {
         "current": {
           "selected": false,
-          "text": "How to Rename Values in Grafana Using Regex-Based Value Mapping - Grafana / How To - Grafana Labs Community Forums",
-          "value": "How to Rename Values in Grafana Using Regex-Based Value Mapping - Grafana / How To - Grafana Labs Community Forums"
+          "text": "Mkdir: can't create directory '/var/lib/grafana/plugins': Permission denied - Grafana / Configuration - Grafana Labs Community Forums",
+          "value": "Mkdir: can't create directory '/var/lib/grafana/plugins': Permission denied - Grafana / Configuration - Grafana Labs Community Forums"
         },
         "hide": 2,
         "name": "community_page_title",
@@ -1124,7 +1129,7 @@
             "value": "Admin password reset - Grafana / Authentication - Grafana Labs Community Forums"
           }
         ],
-        "query": "How to Rename Values in Grafana Using Regex-Based Value Mapping - Grafana / How To - Grafana Labs Community Forums",
+        "query": "Mkdir: can't create directory '/var/lib/grafana/plugins': Permission denied - Grafana / Configuration - Grafana Labs Community Forums",
         "skipUrlSync": false,
         "type": "textbox"
       }
@@ -1138,6 +1143,6 @@
   "timezone": "utc",
   "title": "04_dashboard_with_data_links",
   "uid": "fdgz83tm7lou8a",
-  "version": 18,
+  "version": 19,
   "weekStart": ""
 }
