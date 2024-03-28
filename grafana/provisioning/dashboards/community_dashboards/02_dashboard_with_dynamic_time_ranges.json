@@ -703,7 +703,7 @@
           "refId": "A"
         }
       ],
-      "title": "Top 20 Pages by Views",
+      "title": "Top 20 Pages by Total Page Views",
       "transformations": [
         {
           "id": "calculateField",
