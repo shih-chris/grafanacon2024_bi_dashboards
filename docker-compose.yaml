@@ -30,7 +30,7 @@ services:
       - grafana
 
   clickhouse:
-    image: 'clickhouse/clickhouse-server:24.1'
+    image: 'clickhouse/clickhouse-server:23.3'
     container_name: 'grafana-clickhouse-server'
     ports:
       - '8123:8123'
