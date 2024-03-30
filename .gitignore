@@ -2,4 +2,5 @@ postgres/community_data/*
 !postgres/community_data/example_data.csv
 clickhouse/community_data/*
 clickhouse/data/*
-!clickhouse/community_data/example_data.csv
+!clickhouse/community_data/example_community_page_stats_daily.csv
+!clickhouse/community_data/example_community_stats_daily.csv
