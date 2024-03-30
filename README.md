@@ -2,6 +2,7 @@
 ## Overview
 This is a demo dashboard for use in the [Building interactive Grafana dashboards for business intelligence](https://grafana.com/about/events/grafanacon/2024/building-interactive-bi-dashboards-tips-and-tricks/) presentation!
 
+![image](https://github.com/shih-chris/grafanacon2024_bi_dashboards/assets/14276197/dda3ac50-b20e-4727-a6ef-c2d131c5980b)
 
 In this repo, we will build a Grafana dashboard that digs into our Grafana Community data to share and example of how we have used Grafana's native interactivity to create business intelligence dashboards that encourage users to explore.
 
