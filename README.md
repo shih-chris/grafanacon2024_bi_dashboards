@@ -13,10 +13,17 @@ In this repo, we will build a Grafana dashboard that digs into our Grafana Commu
 ## Structure
 At Grafana Labs we leverage a central data warehouse to combine and store much of our business data. In particular, we make heavy use of our BigQuery data source plugin.
 
-However, for this demo, in order to appease the demo gods, we will build everything locally, store our data in a PostgresDB, and leverage our Grafana Postgres data source.
+However, for this demo, in order to appease the demo gods, we will build everything locally, store our data in a Clickhouse database, and leverage our Grafana Clickhouse data source.
 
 ## How to Run
+> NOTE: the community page view data that drives this demo is .gitignored. Sharing the underlying data is still WIP
+> for now, you'll need to copy the clickhouse/community_data/example_community_page_stats_daily.csv -> clickhouse/community_data/community_page_stats_daily.csv
+> and copy the clickhouse/community_data/example_community_stats_daily.csv -> clickhouse/community_data/community_stats_daily.csv
 To run the demo setup:
+
+```bash
+docker-compose build
+```
 
 ```bash
 docker-compose up -d
