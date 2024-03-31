@@ -64,7 +64,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<p \n  style=\"font-size:300%;text-align:center; font-weight:bold;color:#cBD0200;>\"\n>\nOverall Engagement (Page Views, Unique Visitors)\n</p>",
+        "content": "<p \n  style=\"font-size:350%;text-align:center; font-weight:normal;color:#cBD0200;>\"\n>\nOverall Engagement (Page Views, Unique Visitors)\n</p>",
         "mode": "html"
       },
       "pluginVersion": "10.4.0",
@@ -89,7 +89,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<p \n  style=\"font-size:150%;text-align:center; font-weight:bold;color:#cBD0200;>\"\n>\n💡 Key Question 💡 - At a high-level, how has our <span style=\"color: rgb(255, 248, 153)\">community engagement</span>  grown over time, and are there any general trends?\n</p>\n",
+        "content": "<p \n  style=\"font-size:150%;text-align:center; font-weight:normal;color:#cBD0200;>\"\n>\n💡 Key Question 💡 - At a high-level, how has our <span style=\"color: rgb(255, 248, 153)\">community engagement</span>  grown over time, and are there any general trends?\n</p>\n",
         "mode": "html"
       },
       "pluginVersion": "10.4.0",
@@ -548,7 +548,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<p \n  style=\"font-size:300%;text-align:center; font-weight:bold;color:#cBD0200;>\"\n>\nSources of Page View Growth\n</p>",
+        "content": "<p \n  style=\"font-size:350%;text-align:center; font-weight:normal;color:#cBD0200;>\"\n>\nSources of Page View Growth\n</p>",
         "mode": "html"
       },
       "pluginVersion": "10.4.0",
@@ -573,7 +573,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<p \n  style=\"font-size:150%;text-align:center; font-weight:bold;color:#cBD0200;>\"\n>\n💡 Key Question 💡 - Generally, are there any clear <span style=\"color: rgb(87, 148, 242)\">primary growth drivers</span> - new vs. existing pages? Top 10 vs. all other pages?\n</p>\n",
+        "content": "<p \n  style=\"font-size:150%;text-align:center; font-weight:normal;color:#cBD0200;>\"\n>\n💡 Key Question 💡 - Generally, are there any clear <span style=\"color: rgb(87, 148, 242)\">primary growth drivers</span> - new vs. existing pages? Top 10 vs. all other pages?\n</p>\n",
         "mode": "html"
       },
       "pluginVersion": "10.4.0",
@@ -804,7 +804,7 @@
       "id": 17,
       "options": {
         "barRadius": 0.05,
-        "barWidth": 0.7,
+        "barWidth": 0.85,
         "fullHighlight": false,
         "groupWidth": 0.7,
         "legend": {
@@ -973,7 +973,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<p \n  style=\"font-size:300%;text-align:center; font-weight:bold;color:#cBD0200;>\"\n>\nIndividual Community Page Details\n</p>",
+        "content": "<p \n  style=\"font-size:350%;text-align:center; font-weight:normal;color:#cBD0200;>\"\n>\nIndividual Community Page Details\n</p>",
         "mode": "html"
       },
       "pluginVersion": "10.4.0",
@@ -998,7 +998,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<p \n  style=\"font-size:150%;text-align:center; font-weight:bold;color:#cBD0200;>\"\n>\n💡 Key Question 💡 - Have there been any individual pages that have been a <span style=\"color: rgb(163, 82, 204)\">primary contributor to growth</span>?\n</p>\n",
+        "content": "<p \n  style=\"font-size:150%;text-align:center; font-weight:normal;color:#cBD0200;>\"\n>\n💡 Key Question 💡 - Have there been any individual pages that have been a <span style=\"color: rgb(163, 82, 204)\">primary contributor to growth</span>?\n</p>\n",
         "mode": "html"
       },
       "pluginVersion": "10.4.0",
@@ -1419,7 +1419,12 @@
           "show": false
         },
         "showHeader": true,
-        "sortBy": []
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Community Page Views"
+          }
+        ]
       },
       "pluginVersion": "10.4.0",
       "targets": [
@@ -1562,7 +1567,7 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "day",
           "value": "day"
         },
@@ -1684,19 +1689,19 @@
       {
         "current": {
           "selected": false,
-          "text": "How to Find Your Grafana Version Info (3 different ways) - Grafana / How To - Grafana Labs Community Forums",
-          "value": "How to Find Your Grafana Version Info (3 different ways) - Grafana / How To - Grafana Labs Community Forums"
+          "text": "Problem with debian repository key - Grafana / Installation - Grafana Labs Community Forums",
+          "value": "Problem with debian repository key - Grafana / Installation - Grafana Labs Community Forums"
         },
         "hide": 2,
         "name": "community_page_title",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "Admin password reset - Grafana / Authentication - Grafana Labs Community Forums",
             "value": "Admin password reset - Grafana / Authentication - Grafana Labs Community Forums"
           }
         ],
-        "query": "How to Find Your Grafana Version Info (3 different ways) - Grafana / How To - Grafana Labs Community Forums",
+        "query": "Problem with debian repository key - Grafana / Installation - Grafana Labs Community Forums",
         "skipUrlSync": false,
         "type": "textbox"
       },
@@ -1737,6 +1742,6 @@
   "timezone": "utc",
   "title": "05_Community_Overview",
   "uid": "edh6biug27z7kf",
-  "version": 8,
+  "version": 10,
   "weekStart": ""
 }
