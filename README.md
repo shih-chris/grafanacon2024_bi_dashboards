@@ -18,6 +18,7 @@ However, for this demo, in order to appease the demo gods, we will build everyth
 ## How to Run
 > NOTE: the community page view data that drives this demo is .gitignored. Sharing the underlying data is still WIP
 
+For now, the dashboard *should* run with the truncated example data...but likely will not resemble the demo screenshot.
 Copy the example data:
 ```bash
 cp ./clickhouse/community_data/example_community_page_stats_daily.csv ./clickhouse/community_data/community_page_stats_daily.csv
