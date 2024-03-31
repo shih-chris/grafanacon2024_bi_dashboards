@@ -1,0 +1,493 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 6,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "PDF61E9E97939C7ED"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div\n    style=\"\n        background-image: url(https://grafana.com/static/img/grafana_labs.jpg);\n        background-position: 0% 25%;\n        background-size: cover;\n        text-align: right;\n    \"\n>\n    <img \n        style=\"\n            height:2em;\n            margin:0.5%;\n            padding-right: 2em;\n        \"\n        src=\"https://grafana.com/static/assets/internal/grafana_logo-web.svg\"\n    >\n</div>\n",
+        "mode": "html"
+      },
+      "pluginVersion": "10.4.0",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "PDF61E9E97939C7ED"
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 2,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<p \n  style=\"font-size:350%;text-align:center; font-weight:normal;color:#cBD0200;>\"\n>\nIndividual Community Page Details\n</p>",
+        "mode": "html"
+      },
+      "pluginVersion": "10.4.0",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "PDF61E9E97939C7ED"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "super-light-blue",
+            "mode": "fixed"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "page_url"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "",
+                    "url": "${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*T30D/"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-blue",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 150
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Created Date"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeFromNow"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.width",
+                "value": 150
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 5,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.4.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "PDF61E9E97939C7ED"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "columns": [],
+              "database": "",
+              "limit": 1000,
+              "mode": "list",
+              "queryType": "table",
+              "table": ""
+            }
+          },
+          "pluginVersion": "4.0.4",
+          "queryType": "table",
+          "rawSql": "with\n\nfinal as (\n\n    select *, concat('https://community.grafana.com', page_path) as page_url\n    from dim_community_pages\n    where page_path = ${page_path:sqlstring}\n\n)\n\n-- final as (\n--\n--     select 1 as sort_order, 'Page Title' as key, page_title as value from deduped_pages\n--     union all\n--     select 2 as sort_order, 'Page URL' as key, concat('https://community.grafana.com', page_path) as value from deduped_pages\n--     union all\n--     select 3 as sort_order, 'Create Date' as key, cast(first_page_date as String) as value from deduped_pages\n--     union all\n--     select 4 as sort_order, 'T30D Page Views' as key, cast(t30d_page_views as String) as value from deduped_pages\n--     union all\n--     select 5 as sort_order, 'T30D Page Rank' as key, cast(t30d_page_rank as String) as value from deduped_pages\n--\n-- )\n\nselect *\nfrom final\n",
+          "refId": "A"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "page_path": true,
+              "rnk": true,
+              "sort_order": true,
+              "total_page_views": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "first_page_date": 3,
+              "page_path": 2,
+              "page_title": 0,
+              "page_url": 1,
+              "rnk": 6,
+              "t30d_page_rank": 5,
+              "t30d_page_views": 4
+            },
+            "renameByName": {
+              "first_page_date": "Created Date",
+              "page_path": "",
+              "page_title": "Page Title",
+              "page_url": "Page URL",
+              "t30d_page_rank": "T30D Page Rank",
+              "t30d_page_views": "T30D Page Views"
+            }
+          }
+        },
+        {
+          "id": "formatTime",
+          "options": {
+            "outputFormat": "YYYY-MM-DD",
+            "timeField": "Created Date",
+            "timezone": "utc",
+            "useTimezone": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "PDF61E9E97939C7ED"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 9,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "page_views"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#8e3bb880",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "moving_average"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-purple",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 3
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "displayName",
+                "value": "Moving Average - 7 days"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "timezone": [
+          "utc"
+        ],
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "PDF61E9E97939C7ED"
+          },
+          "editorMode": "code",
+          "editorType": "sql",
+          "format": 1,
+          "meta": {},
+          "pluginVersion": "4.0.4",
+          "queryType": "table",
+          "rawQuery": true,
+          "rawSql": "with\n\npage_views as (\n\n    select\n        date_trunc('day', p.received_date) as time_period\n        ,sum(page_views) as page_views\n    from\n        rpt_community_page_stats_daily p\n    where\n        p.page_path = cast(${page_path:sqlstring} as String)\n    group by 1\n\n),\n\nfinal as (\n\n    select\n        p.time_period\n        ,p.page_views\n        ,avg(p.page_views) over (order by p.time_period rows between 6 preceding and current row) as moving_average\n    from\n        page_views p\n\n)\n\nselect *\nfrom final\nwhere\n    $__timeFilter(time_period)\n    and time_period between '2023-04-07' and '2024-03-28'\norder by 1\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Page Views by Day",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "distinct_pages": true,
+              "new_page_views": true,
+              "unique_pages": true,
+              "unique_visitors": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "distinct_pages": "",
+              "moving_average": "",
+              "page_views": "Community Page Views",
+              "t7d_moving_average": "7-day Moving Average",
+              "unique_visitors": "Unique Visitors"
+            }
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "timeseries"
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "/t/admin-password-reset/19455",
+          "value": "/t/admin-password-reset/19455"
+        },
+        "hide": 0,
+        "label": "Page Path",
+        "name": "page_path",
+        "options": [
+          {
+            "selected": true,
+            "text": "/t/admin-password-reset/19455",
+            "value": "/t/admin-password-reset/19455"
+          }
+        ],
+        "query": "/t/admin-password-reset/19455",
+        "skipUrlSync": false,
+        "type": "textbox"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6M",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "06_individual_community_page_details",
+  "uid": "adha2vm34kd8ga",
+  "version": 2,
+  "weekStart": ""
+}

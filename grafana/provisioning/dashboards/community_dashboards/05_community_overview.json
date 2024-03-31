@@ -1311,6 +1311,11 @@
                     "targetBlank": true,
                     "title": "Community Page",
                     "url": "https://community.grafana.com${__data.fields.page_path}"
+                  },
+                  {
+                    "targetBlank": true,
+                    "title": "Individual Page Dashboard",
+                    "url": "/d/adha2vm34kd8ga/06-individual-community-page-details?orgId=1&var-page_path=${__data.fields.page_path:percentencode}"
                   }
                 ]
               }
@@ -1567,7 +1572,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "day",
           "value": "day"
         },
@@ -1688,20 +1693,20 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "Problem with debian repository key - Grafana / Installation - Grafana Labs Community Forums",
-          "value": "Problem with debian repository key - Grafana / Installation - Grafana Labs Community Forums"
+          "selected": true,
+          "text": "Admin password reset - Grafana / Authentication - Grafana Labs Community Forums",
+          "value": "Admin password reset - Grafana / Authentication - Grafana Labs Community Forums"
         },
         "hide": 2,
         "name": "community_page_title",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "Admin password reset - Grafana / Authentication - Grafana Labs Community Forums",
             "value": "Admin password reset - Grafana / Authentication - Grafana Labs Community Forums"
           }
         ],
-        "query": "Problem with debian repository key - Grafana / Installation - Grafana Labs Community Forums",
+        "query": "Admin password reset - Grafana / Authentication - Grafana Labs Community Forums",
         "skipUrlSync": false,
         "type": "textbox"
       },
@@ -1742,6 +1747,6 @@
   "timezone": "utc",
   "title": "05_Community_Overview",
   "uid": "edh6biug27z7kf",
-  "version": 10,
+  "version": 1,
   "weekStart": ""
 }
