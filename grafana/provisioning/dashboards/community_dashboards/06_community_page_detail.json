@@ -272,6 +272,65 @@
         "type": "grafana-clickhouse-datasource",
         "uid": "PDF61E9E97939C7ED"
       },
+      "gridPos": {
+        "h": 18,
+        "w": 14,
+        "x": 0,
+        "y": 8
+      },
+      "id": 7,
+      "options": {
+        "onclick": "console.log(data)\nvar base_url = 'd/adha2vm34kd8ga/06-individual-community-page-details?orgId=1&from=now-90d&to=now&var-page_path='\nvar url = base_url + data.points[0].text;\nwindow.open(url);\n\n// in case you want to open in a new window\n// window.open(url, '_blank');",
+        "script": "// create inputs\nvar page_path = data.series[0].fields[0].values\nvar page_title = data.series[0].fields[1].values\nvar x_axis = data.series[0].fields[2].values\nvar y_axis = data.series[0].fields[3].values\nvar z_axis = data.series[0].fields[4].values\nvar page_type = data.series[0].fields[5].values\n\n// create vars\nvar traces = {}\n\ngrafana_color_palette = {\n    1: 'rgb(222, 182, 242)', // light purple\n    2: 'rgb(184, 119, 217)', // medium purple\n    3: 'rgb(143, 59, 184)', // dark purple\n    4: 'rgb(192, 216, 255)', // light blue\n    5: 'rgb(87, 148, 242)', // medium blue\n    6: 'rgb(31, 96, 196)', // dark blue\n    7: 'rgb(200, 242, 194)', // light green\n    8: 'rgb(115, 191, 105)', // medium green\n    9: 'rgb(55, 135, 45)', // dark green\n    10: 'rgb(255, 248, 153)', // light yellow\n    11: 'rgb(250, 222, 42)', // medium yellow\n    12: 'rgb(224, 180, 0)', // dark yellow\n    13: 'rgb(255, 203, 125)', // light orange\n    14: 'rgb(255, 152, 48)', // medium orange\n    15: 'rgb(250, 100, 0)', // dark orange\n    16: 'rgb(255, 166, 176)', // light red\n    17: 'rgb(242, 73, 92)', // medium red\n    18: 'rgb(196, 22, 42)', // dark red\n}\n\n// Create Traces\ntraces['selected'] = {\n    // trace type\n    type: 'scatter3d',\n    mode: 'markers',\n    name: 'Selected Page',\n\n    // trace data\n    x: [],\n    y: [],\n    z: [],\n    marker: {\n        color: grafana_color_palette[11],\n        size: 11,\n        opacity: 1\n    },\n    hovertext: [],\n    text:[],\n\n    // sets hover to only show text, rather than x + y\n    hoverinfo: 'text'\n}\n\ntraces['previous_pages'] = {\n    // trace type\n    type: 'scatter3d',\n    mode: 'markers',\n    name: 'Common Previous Pages',\n\n    // trace data\n    x: [],\n    y: [],\n    z: [],\n    marker: {\n        color: grafana_color_palette[2],\n        size: 7,\n        opacity: 1\n    },\n    hovertext: [],\n    text:[],\n\n    // sets hover to only show text, rather than x + y\n    hoverinfo: 'text'\n}\n\ntraces['next_pages'] = {\n    // trace type\n    type: 'scatter3d',\n    mode: 'markers',\n    name: 'Common Next Pages',\n\n    // trace data\n    x: [],\n    y: [],\n    z: [],\n    marker: {\n        color: grafana_color_palette[5],\n        size: 7,\n        opacity: 1\n    },\n    hovertext: [],\n    text:[],\n\n    // sets hover to only show text, rather than x + y\n    hoverinfo: 'text'\n}\n\ntraces['top_100'] = {\n    // trace type\n    type: 'scatter3d',\n    mode: 'markers',\n    name: 'Top 100 Pages',\n\n    // trace data\n    x: [],\n    y: [],\n    z: [],\n    marker: {\n        color: 'rgb(101, 101, 101)',\n        size: 4,\n        opacity: 1\n    },\n    hovertext: [],\n    text:[],\n\n    // sets hover to only show text, rather than x + y\n    hoverinfo: 'text'\n}\n\n// We need to create a new trace for each prefix (in order for a legend to work)\n// Map each prefix to a colour and create a dictionary entry in traces\nfor (let i = 0; i < page_path.length; i++) {\n\n    if (page_type[i] == 1) {\n        traces['selected']['x'].push(x_axis[i])\n        traces['selected']['y'].push(y_axis[i])\n        traces['selected']['z'].push(z_axis[i])\n        traces['selected']['hovertext'].push(page_title[i])\n        traces['selected']['text'].push(page_path[i])\n    } else if (page_type[i] == 2) {\n        traces['next_pages']['x'].push(x_axis[i])\n        traces['next_pages']['y'].push(y_axis[i])\n        traces['next_pages']['z'].push(z_axis[i])\n        traces['next_pages']['hovertext'].push(page_title[i])\n        traces['next_pages']['text'].push(page_path[i])\n    } else if (page_type[i] == 3) {\n        traces['previous_pages']['x'].push(x_axis[i])\n        traces['previous_pages']['y'].push(y_axis[i])\n        traces['previous_pages']['z'].push(z_axis[i])\n        traces['previous_pages']['hovertext'].push(page_title[i])\n        traces['previous_pages']['text'].push(page_path[i])\n    } else {\n        traces['top_100']['x'].push(x_axis[i])\n        traces['top_100']['y'].push(y_axis[i])\n        traces['top_100']['z'].push(z_axis[i])\n        traces['top_100']['hovertext'].push(page_title[i])\n        traces['top_100']['text'].push(page_path[i])\n    }\n}\n\n// loop through resulting traces dict to get list of traces\nvar traces_list = []\nfor (let k in traces) {\n    traces_list.push(traces[k])\n}\n\n// set layout details\nvar layout = {\n  scene: {\n    camera: {\n      eye: {\n        x: -0.9,\n        y: 1.1,\n        z: 0.8\n      }\n    }\n  }\n}\n\nreturn {\n    data : traces_list,\n    layout : layout,\n}\n\n"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "PDF61E9E97939C7ED"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "columns": [],
+              "database": "",
+              "limit": 1000,
+              "mode": "list",
+              "queryType": "table",
+              "table": ""
+            }
+          },
+          "pluginVersion": "4.0.4",
+          "queryType": "table",
+          "rawSql": "with\n\nnext_pages as (\n\n    select\n        next_page_path\n        ,page_views\n    from\n        rpt_community_next_pages\n    where\n        page_path = ${page_path:sqlstring}\n        and next_page_path != 'Session Exit'\n    order by page_views desc\n    limit 20\n\n),\n\nprev_pages as (\n\n    select\n        prev_page_path\n        ,page_views\n    from\n        rpt_community_previous_pages\n    where\n        page_path = ${page_path:sqlstring}\n        and prev_page_path != 'Session Start'\n    order by page_views desc\n    limit 20\n\n),\n\npage_details as (\n\n    select\n        page_path\n        ,page_title\n        ,n.page_views as next_page_views\n        ,pr.page_views as prev_page_views\n    from\n        dim_community_pages p\n        left join next_pages n\n            on p.page_path = n.next_page_path\n        left join prev_pages pr\n            on p.page_path = pr.prev_page_path\n    where\n        (\n            p.t30d_page_rank <= 100\n            or p.page_path = ${page_path:sqlstring}\n            or n.page_views > 0\n            or pr.page_views > 0\n        )\n\n),\n\nfinal as (\n\n    select\n        page_path\n        ,page_title\n        ,e.x\n        ,e.y\n        ,e.z\n        ,case\n            when pd.page_path = ${page_path:sqlstring} then 1\n            when pd.next_page_views > 0 then 2\n            when pd.prev_page_views > 0 then 3\n            else 4\n        end as page_type\n    from\n        page_details pd\n        inner join dim_community_page_embeddings e\n            on pd.page_path = e.page_path\n            and pd.page_title = e.page_title\n\n)\n\nselect *\nfrom final\n\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Related Community Pages",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "page_path": false,
+              "page_title": false,
+              "t30d_page_views": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "ae3e-plotly-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "PDF61E9E97939C7ED"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -336,7 +395,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#8e3bb880",
+                  "fixedColor": "#78787880",
                   "mode": "fixed"
                 }
               }
@@ -351,7 +410,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "super-light-purple",
+                  "fixedColor": "yellow",
                   "mode": "fixed"
                 }
               },
@@ -372,9 +431,9 @@
         ]
       },
       "gridPos": {
-        "h": 14,
-        "w": 24,
-        "x": 0,
+        "h": 18,
+        "w": 10,
+        "x": 14,
         "y": 8
       },
       "id": 6,
@@ -452,6 +511,392 @@
       ],
       "transparent": true,
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "PDF61E9E97939C7ED"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 26
+      },
+      "id": 13,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.4.0",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 9,
+      "panels": [],
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "PDF61E9E97939C7ED"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "purple",
+            "mode": "fixed"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "T30D Page Views"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 190
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Previous Page"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "/d/adha2vm34kd8ga/06-individual-community-page-details?orgId=1&${__url_time_range}&var-page_path=${__data.fields.next_page_path:percentencode}"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "json-view"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "prev_page_path"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 12,
+        "x": 0,
+        "y": 28
+      },
+      "id": 12,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.4.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "PDF61E9E97939C7ED"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "columns": [],
+              "database": "",
+              "limit": 1000,
+              "mode": "list",
+              "queryType": "table",
+              "table": ""
+            }
+          },
+          "pluginVersion": "4.0.4",
+          "queryType": "table",
+          "rawSql": "with\n\nfinal as (\n\n    select\n        case\n            when pr.prev_page_path = 'Session Exit' then 'Session Exit'\n            else p.page_title\n        end as page_title\n        ,pr.prev_page_path\n        ,pr.page_views\n    from\n        rpt_community_previous_pages pr\n        left join dim_community_pages p\n            on pr.prev_page_path = p.page_path\n    where\n        pr.page_path = ${page_path:sqlstring}\n    order by pr.page_views desc\n\n)\n\nselect *\nfrom final\nwhere page_title != ''\nlimit 10\n\n",
+          "refId": "A"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "next_page_path": "",
+              "page_title": "Previous Page",
+              "page_views": "T30D Page Views"
+            }
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "PDF61E9E97939C7ED"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "T30D Page Views"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 190
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Next Page"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "/d/adha2vm34kd8ga/06-individual-community-page-details?orgId=1&${__url_time_range}&var-page_path=${__data.fields.next_page_path:percentencode}"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "json-view"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "next_page_path"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 12,
+        "x": 12,
+        "y": 28
+      },
+      "id": 15,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.4.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "PDF61E9E97939C7ED"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "columns": [],
+              "database": "",
+              "limit": 1000,
+              "mode": "list",
+              "queryType": "table",
+              "table": ""
+            }
+          },
+          "pluginVersion": "4.0.4",
+          "queryType": "table",
+          "rawSql": "with\n\nfinal as (\n\n    select\n        case\n            when n.next_page_path = 'Session Exit' then 'Session Exit'\n            else p.page_title\n        end as page_title\n        ,n.next_page_path\n        ,n.page_views\n    from\n        rpt_community_next_pages n\n        left join dim_community_pages p\n            on n.next_page_path = p.page_path\n    where\n        n.page_path = ${page_path:sqlstring}\n    order by n.page_views desc\n\n)\n\nselect *\nfrom final\nwhere page_title != ''\nlimit 10\n",
+          "refId": "A"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "next_page_path": "",
+              "page_title": "Next Page",
+              "page_views": "T30D Page Views"
+            }
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 40
+      },
+      "id": 10,
+      "panels": [],
+      "title": "Appendix",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "P44368ADAD746BC27"
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 41
+      },
+      "id": 11,
+      "options": {
+        "includeVars": false,
+        "keepTime": false,
+        "maxItems": 10,
+        "query": "",
+        "showHeadings": false,
+        "showRecentlyViewed": false,
+        "showSearch": true,
+        "showStarred": false,
+        "tags": []
+      },
+      "pluginVersion": "10.4.0",
+      "title": "Related Dashboards",
+      "transparent": true,
+      "type": "dashlist"
     }
   ],
   "schemaVersion": 39,
@@ -460,7 +905,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "/t/admin-password-reset/19455",
           "value": "/t/admin-password-reset/19455"
         },
@@ -481,13 +926,13 @@
     ]
   },
   "time": {
-    "from": "now-6M",
+    "from": "now-90d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "06_individual_community_page_details",
   "uid": "adha2vm34kd8ga",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }

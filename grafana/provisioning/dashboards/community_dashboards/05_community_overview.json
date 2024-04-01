@@ -1542,7 +1542,7 @@
         "uid": "P44368ADAD746BC27"
       },
       "gridPos": {
-        "h": 9,
+        "h": 11,
         "w": 24,
         "x": 0,
         "y": 81
@@ -1745,7 +1745,7 @@
   },
   "timepicker": {},
   "timezone": "utc",
-  "title": "05_Community_Overview",
+  "title": "05_community_overview",
   "uid": "edh6biug27z7kf",
   "version": 1,
   "weekStart": ""
