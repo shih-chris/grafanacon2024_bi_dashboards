@@ -615,7 +615,7 @@
                 "value": [
                   {
                     "title": "",
-                    "url": "/d/adha2vm34kd8ga/06-individual-community-page-details?orgId=1&${__url_time_range}&var-page_path=${__data.fields.next_page_path:percentencode}"
+                    "url": "/d/adha2vm34kd8ga/06-individual-community-page-details?orgId=1&${__url_time_range}&var-page_path=${__data.fields.prev_page_path:percentencode}"
                   }
                 ]
               },
@@ -906,20 +906,20 @@
       {
         "current": {
           "selected": false,
-          "text": "/t/admin-password-reset/19455",
-          "value": "/t/admin-password-reset/19455"
+          "text": "/t/how-to-reset-lost-admin-password-in-grafana/101736",
+          "value": "/t/how-to-reset-lost-admin-password-in-grafana/101736"
         },
         "hide": 0,
         "label": "Page Path",
         "name": "page_path",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "/t/admin-password-reset/19455",
             "value": "/t/admin-password-reset/19455"
           }
         ],
-        "query": "/t/admin-password-reset/19455",
+        "query": "/t/how-to-reset-lost-admin-password-in-grafana/101736",
         "skipUrlSync": false,
         "type": "textbox"
       }
