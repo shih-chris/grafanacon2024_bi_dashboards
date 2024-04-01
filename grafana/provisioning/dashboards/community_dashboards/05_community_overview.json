@@ -858,7 +858,7 @@
           }
         }
       ],
-      "title": "Monthly Community Page Views: new_vs_existing",
+      "title": "Monthly Community Page Views: ${monthly_group_by}",
       "transformations": [
         {
           "id": "sortBy",
@@ -1424,12 +1424,7 @@
           "show": false
         },
         "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "Community Page Views"
-          }
-        ]
+        "sortBy": []
       },
       "pluginVersion": "10.4.0",
       "targets": [
@@ -1572,7 +1567,7 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "day",
           "value": "day"
         },
@@ -1605,7 +1600,7 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "7",
           "value": "7"
         },
@@ -1693,28 +1688,28 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": "Admin password reset - Grafana / Authentication - Grafana Labs Community Forums",
-          "value": "Admin password reset - Grafana / Authentication - Grafana Labs Community Forums"
+          "selected": false,
+          "text": "Login issue after update to 10.1.0 (coming from 10.0.3) - Grafana / Authentication - Grafana Labs Community Forums",
+          "value": "Login issue after update to 10.1.0 (coming from 10.0.3) - Grafana / Authentication - Grafana Labs Community Forums"
         },
         "hide": 2,
         "name": "community_page_title",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "Admin password reset - Grafana / Authentication - Grafana Labs Community Forums",
             "value": "Admin password reset - Grafana / Authentication - Grafana Labs Community Forums"
           }
         ],
-        "query": "Admin password reset - Grafana / Authentication - Grafana Labs Community Forums",
+        "query": "Login issue after update to 10.1.0 (coming from 10.0.3) - Grafana / Authentication - Grafana Labs Community Forums",
         "skipUrlSync": false,
         "type": "textbox"
       },
       {
         "current": {
           "selected": false,
-          "text": "new_vs_existing",
-          "value": "new_vs_existing"
+          "text": "top_100_vs_others",
+          "value": "top_100_vs_others"
         },
         "hide": 2,
         "includeAll": false,
@@ -1722,12 +1717,12 @@
         "name": "monthly_group_by",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "new_vs_existing",
             "value": "new_vs_existing"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "top_100_vs_others",
             "value": "top_100_vs_others"
           }
@@ -1747,6 +1742,6 @@
   "timezone": "utc",
   "title": "05_community_overview",
   "uid": "edh6biug27z7kf",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
