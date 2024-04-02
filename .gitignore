@@ -4,3 +4,6 @@ clickhouse/community_data/*
 clickhouse/data/*
 !clickhouse/community_data/example_community_page_stats_daily.csv
 !clickhouse/community_data/example_community_stats_daily.csv
+!clickhouse/community_data/example_community_next_pages.csv
+!clickhouse/community_data/example_community_previous_pages.csv
+!clickhouse/community_data/example_community_page_embedding.csv
