@@ -681,7 +681,7 @@
           },
           "pluginVersion": "4.0.4",
           "queryType": "table",
-          "rawSql": "with\n\nfinal as (\n\n    select\n        case\n            when pr.prev_page_path = 'Session Exit' then 'Session Exit'\n            else p.page_title\n        end as page_title\n        ,pr.prev_page_path\n        ,pr.page_views\n    from\n        rpt_community_previous_pages pr\n        left join dim_community_pages p\n            on pr.prev_page_path = p.page_path\n    where\n        pr.page_path = ${page_path:sqlstring}\n    order by pr.page_views desc\n\n)\n\nselect *\nfrom final\nwhere page_title != ''\nlimit 10\n\n",
+          "rawSql": "with\n\nfinal as (\n\n    select\n        case\n            when pr.prev_page_path = 'Session Exit' then 'Session Exit'\n            else p.page_title\n        end as page_title\n        ,pr.prev_page_path\n        ,pr.page_views\n    from\n        rpt_community_previous_pages pr\n        inner join dim_community_pages p\n            on pr.prev_page_path = p.page_path\n    where\n        pr.page_path = ${page_path:sqlstring}\n    order by pr.page_views desc\n\n)\n\nselect *\nfrom final\nwhere page_title != ''\nlimit 10\n\n",
           "refId": "A"
         }
       ],
@@ -835,7 +835,7 @@
           },
           "pluginVersion": "4.0.4",
           "queryType": "table",
-          "rawSql": "with\n\nfinal as (\n\n    select\n        case\n            when n.next_page_path = 'Session Exit' then 'Session Exit'\n            else p.page_title\n        end as page_title\n        ,n.next_page_path\n        ,n.page_views\n    from\n        rpt_community_next_pages n\n        left join dim_community_pages p\n            on n.next_page_path = p.page_path\n    where\n        n.page_path = ${page_path:sqlstring}\n    order by n.page_views desc\n\n)\n\nselect *\nfrom final\nwhere page_title != ''\nlimit 10\n",
+          "rawSql": "with\n\nfinal as (\n\n    select\n        case\n            when n.next_page_path = 'Session Exit' then 'Session Exit'\n            else p.page_title\n        end as page_title\n        ,n.next_page_path\n        ,n.page_views\n    from\n        rpt_community_next_pages n\n        inner join dim_community_pages p\n            on n.next_page_path = p.page_path\n    where\n        n.page_path = ${page_path:sqlstring}\n    order by n.page_views desc\n\n)\n\nselect *\nfrom final\nwhere page_title != ''\nlimit 10\n",
           "refId": "A"
         }
       ],
@@ -906,8 +906,8 @@
       {
         "current": {
           "selected": false,
-          "text": "/t/how-to-reset-lost-admin-password-in-grafana/101736",
-          "value": "/t/how-to-reset-lost-admin-password-in-grafana/101736"
+          "text": "/t/how-to-find-your-grafana-version-info-3-different-ways/86857",
+          "value": "/t/how-to-find-your-grafana-version-info-3-different-ways/86857"
         },
         "hide": 0,
         "label": "Page Path",
@@ -919,7 +919,7 @@
             "value": "/t/admin-password-reset/19455"
           }
         ],
-        "query": "/t/how-to-reset-lost-admin-password-in-grafana/101736",
+        "query": "/t/how-to-find-your-grafana-version-info-3-different-ways/86857",
         "skipUrlSync": false,
         "type": "textbox"
       }
@@ -933,6 +933,6 @@
   "timezone": "",
   "title": "06_individual_community_page_details",
   "uid": "adha2vm34kd8ga",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
